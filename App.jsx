@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { BrowserRouter, Routes, Route, Navigate, useNavigate } from 'react-router-dom';
+import { BrowserRouter, Routes, Route, Navigate, useNavigate, useLocation } from 'react-router-dom';
 import Login from './pages/Login';
 import Main from './pages/Main';
 import RegionDetail from './pages/RegionDetail';
@@ -7,31 +7,51 @@ import PlaceDetail from './pages/PlaceDetail';
 import Profile from './pages/Profile';
 import './style.css';
 
+function ScrollToTop() {
+  const { pathname } = useLocation();
+  
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [pathname]);
+  
+  return null;
+}
+
 function App() {
   const [user, setUser] = useState(null);
 
   useEffect(() => {
     const savedUser = localStorage.getItem('currentUser');
     if (savedUser) {
-      setUser(JSON.parse(savedUser));
+      try {
+        setUser(JSON.parse(savedUser));
+      } catch (error) {
+        console.error('Ошибка при чтении пользователя:', error);
+        localStorage.removeItem('currentUser');
+      }
     }
   }, []);
 
   const login = (username, password) => {
-    const users = JSON.parse(localStorage.getItem('users') || '[]');
-    const foundUser = users.find(u => u.username === username && u.password === password);
-    
-    if (foundUser) {
-      const userData = {
-        id: foundUser.id,
-        username: foundUser.username,
-        displayName: foundUser.displayName
-      };
-      setUser(userData);
-      localStorage.setItem('currentUser', JSON.stringify(userData));
-      return true;
+    try {
+      const users = JSON.parse(localStorage.getItem('users') || '[]');
+      const foundUser = users.find(u => u.username === username && u.password === password);
+      
+      if (foundUser) {
+        const userData = {
+          id: foundUser.id,
+          username: foundUser.username,
+          displayName: foundUser.displayName
+        };
+        setUser(userData);
+        localStorage.setItem('currentUser', JSON.stringify(userData));
+        return true;
+      }
+      return false;
+    } catch (error) {
+      console.error('Ошибка при входе:', error);
+      return false;
     }
-    return false;
   };
 
   const logout = () => {
@@ -40,31 +60,36 @@ function App() {
   };
 
   const register = (username, password, displayName) => {
-    const users = JSON.parse(localStorage.getItem('users') || '[]');
-    
-    if (users.some(u => u.username === username)) {
+    try {
+      const users = JSON.parse(localStorage.getItem('users') || '[]');
+      
+      if (users.some(u => u.username === username)) {
+        return false;
+      }
+
+      const newUser = {
+        id: Date.now().toString(),
+        username,
+        password,
+        displayName
+      };
+
+      users.push(newUser);
+      localStorage.setItem('users', JSON.stringify(users));
+      
+      const userData = {
+        id: newUser.id,
+        username: newUser.username,
+        displayName: newUser.displayName
+      };
+      
+      setUser(userData);
+      localStorage.setItem('currentUser', JSON.stringify(userData));
+      return true;
+    } catch (error) {
+      console.error('Ошибка при регистрации:', error);
       return false;
     }
-
-    const newUser = {
-      id: Date.now().toString(),
-      username,
-      password,
-      displayName
-    };
-
-    users.push(newUser);
-    localStorage.setItem('users', JSON.stringify(users));
-    
-    const userData = {
-      id: newUser.id,
-      username: newUser.username,
-      displayName: newUser.displayName
-    };
-    
-    setUser(userData);
-    localStorage.setItem('currentUser', JSON.stringify(userData));
-    return true;
   };
 
   return (
@@ -73,6 +98,7 @@ function App() {
         <Header user={user} logout={logout} />
         
         <main className="main-content">
+          <ScrollToTop />
           <Routes>
             <Route path="/login" element={
               user ? <Navigate to="/" /> : 
@@ -97,7 +123,6 @@ function App() {
   );
 }
 
-// Выносим Header в отдельный компонент для использования useNavigate
 function Header({ user, logout }) {
   const navigate = useNavigate();
 
@@ -106,27 +131,55 @@ function Header({ user, logout }) {
     navigate('/login');
   };
 
-  const handleNavigation = (path) => {
-    navigate(path);
-  };
-
   return (
     <header className="header">
-      <h1>Беларусь Travel Diary</h1>
-      {user && (
-        <div className="user-menu">
-          <span>Привет, {user.displayName}!</span>
-          <button onClick={() => handleNavigation('/profile')}>
-            Профиль
-          </button>
-          <button onClick={() => handleNavigation('/')}>
-            Главная
-          </button>
-          <button onClick={handleLogout}>
-            Выйти
-          </button>
+      <div className="header-content">
+        <div 
+          className="logo" 
+          onClick={() => navigate('/')}
+          style={{ cursor: 'pointer' }}
+        >
+          <div className="logo-icon">BEL</div>
+          <h1>Беларусь Travel Diary</h1>
         </div>
-      )}
+        
+        {user && (
+          <div className="user-menu">
+            <div className="user-greeting">
+              <span className="user-avatar-mini">
+                {user.displayName?.charAt(0) || 'U'}
+              </span>
+              <span className="user-name">Привет, {user.displayName}</span>
+            </div>
+            
+            <div className="nav-buttons">
+              <button 
+                className="nav-btn"
+                onClick={() => navigate('/')}
+                title="Главная"
+              >
+                Главная
+              </button>
+              
+              <button 
+                className="nav-btn"
+                onClick={() => navigate('/profile')}
+                title="Профиль"
+              >
+                Профиль
+              </button>
+              
+              <button 
+                className="nav-btn logout-btn"
+                onClick={handleLogout}
+                title="Выйти"
+              >
+                Выйти
+              </button>
+            </div>
+          </div>
+        )}
+      </div>
     </header>
   );
 }
