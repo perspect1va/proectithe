@@ -7,6 +7,7 @@ const PlaceDetail = () => {
   const { placeId } = useParams();
   const place = places.find(p => p.id === placeId);
   const [visited, setVisited] = useState(false);
+  const [postponed, setPostponed] = useState(false);
   const [rating, setRating] = useState(0);
   const [wouldReturn, setWouldReturn] = useState(null);
   const [photos, setPhotos] = useState([]);
@@ -19,6 +20,7 @@ const PlaceDetail = () => {
       const placeData = userData[placeId] || {};
       
       setVisited(placeData.visited || false);
+      setPostponed(placeData.postponed || false);
       setRating(placeData.rating || 0);
       setWouldReturn(placeData.wouldReturn || null);
       setPhotos(placeData.photos || []);
@@ -38,7 +40,37 @@ const PlaceDetail = () => {
   const handleVisitToggle = () => {
     const newVisited = !visited;
     setVisited(newVisited);
-    saveUserData({ visited: newVisited });
+    
+    if (newVisited) {
+      setPostponed(false);
+      saveUserData({ 
+        visited: newVisited, 
+        visitedDate: new Date().toISOString(),
+        postponed: false 
+      });
+    } else {
+      saveUserData({ visited: newVisited });
+    }
+  };
+
+  const handlePostponeToggle = () => {
+    const newPostponed = !postponed;
+    setPostponed(newPostponed);
+    
+    if (newPostponed) {
+      setVisited(false);
+      saveUserData({ 
+        postponed: newPostponed, 
+        postponedDate: new Date().toISOString(),
+        visited: false,
+        rating: 0,
+        wouldReturn: null,
+        review: '',
+        photos: []
+      });
+    } else {
+      saveUserData({ postponed: newPostponed });
+    }
   };
 
   const handleRatingChange = (newRating) => {
@@ -69,7 +101,12 @@ const PlaceDetail = () => {
   };
 
   if (!place) {
-    return <div>Место не найдено</div>;
+    return (
+      <div className="place-not-found">
+        <h2>Место не найдено</h2>
+        <Link to="/" className="back-link">Вернуться на главную</Link>
+      </div>
+    );
   }
 
   return (
@@ -79,22 +116,48 @@ const PlaceDetail = () => {
       </Link>
 
       <div className="place-header">
-        <img src={place.image} alt={place.name} className="place-image" />
+        <div className="place-image-container">
+          <img src={place.image} alt={place.name} className="place-image" />
+          <div className="place-rating-header">
+            <span className="rating-value">{place.rating}</span>
+            <span className="rating-max">/5</span>
+          </div>
+        </div>
         <div className="place-info">
           <h2>{place.name}</h2>
           <p className="place-category">{place.category}</p>
-          <p className="place-address">{place.address}</p>
-          <p className="place-description">{place.description}</p>
+          <div className="place-description-container">
+            <p className="place-description">{place.description}</p>
+          </div>
+          <div className="place-meta">
+            <div className="meta-item">
+              <span className="meta-label">Рейтинг:</span>
+              <span className="meta-value">{place.rating}/5</span>
+            </div>
+            <div className="meta-item">
+              <span className="meta-label">Категория:</span>
+              <span className="meta-value">{place.category}</span>
+            </div>
+          </div>
         </div>
       </div>
 
       <div className="place-actions">
-        <button 
-          className={`visit-btn ${visited ? 'visited' : ''}`}
-          onClick={handleVisitToggle}
-        >
-          {visited ? '✓ Вы посетили это место' : 'Отметить посещение'}
-        </button>
+        <div className="action-buttons">
+          <button 
+            className={`visit-btn ${visited ? 'visited' : ''}`}
+            onClick={handleVisitToggle}
+          >
+            {visited ? '✓ Посещено' : 'Отметить посещение'}
+          </button>
+
+          <button 
+            className={`postpone-btn ${postponed ? 'active' : ''}`}
+            onClick={handlePostponeToggle}
+          >
+            {postponed ? '✓ Отложено' : 'Отложить'}
+          </button>
+        </div>
 
         {visited && (
           <div className="user-feedback">
@@ -111,6 +174,7 @@ const PlaceDetail = () => {
                   </span>
                 ))}
               </div>
+              <p className="rating-hint">Нажмите звезду для оценки</p>
             </div>
 
             <div className="return-section">
@@ -149,15 +213,37 @@ const PlaceDetail = () => {
             </div>
 
             <div className="photos-section">
-              <h3>Ваши фото:</h3>
-              <input
-                type="file"
-                accept="image/*"
-                onChange={handlePhotoUpload}
-                className="photo-upload"
-              />
+              <h3>Ваши фотографии:</h3>
+              <div className="photo-upload-container">
+                <input
+                  type="file"
+                  accept="image/*"
+                  onChange={handlePhotoUpload}
+                  className="photo-upload"
+                  id="photo-upload"
+                />
+                <label htmlFor="photo-upload" className="upload-label">
+                  Загрузить фотографию
+                </label>
+              </div>
               <PhotoGallery photos={photos} />
             </div>
+          </div>
+        )}
+
+        {postponed && !visited && (
+          <div className="postponed-notice">
+            <div className="notice-icon">⏱</div>
+            <div className="notice-content">
+              <h3>Место отложено</h3>
+              <p>Вы планируете посетить его в ближайшее время.</p>
+            </div>
+            <button 
+              className="cancel-postpone-btn"
+              onClick={handlePostponeToggle}
+            >
+              Отменить
+            </button>
           </div>
         )}
       </div>
