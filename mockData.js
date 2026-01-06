@@ -21,13 +21,13 @@ export const regions = [
     id: 'gomel',
     name: 'Гомельская область',
     image: 'https://www.rudorogi.ru/storage/fm/images/file/zdsxfg.jpg',
-    placesCount: 8 
+    placesCount: 9
   },
   {
     id: 'grodno',
     name: 'Гродненская область',
     image: 'https://minskholidays.by/img/carousel/mirskii-i-nesvijskii-zamki-1.jpg',
-    placesCount: 15 
+    placesCount: 19 
   },
   {
     id: 'vitebsk',
@@ -210,7 +210,7 @@ export const places = [
     id: 'minsk-region-2', 
     name: 'Дудутки', 
     region: 'minsk-region',
-    image: 'https://turby.by/images/05.2023/Screenshot_1501.jpg',
+    image: 'https://dudutki.by/images/cache/_thumb_200x200xcut_upload_iblock_438_9d0a1a2ea0c3808340a6239c7c3d14bd-thumb-780x1500.jpg',
     description: 'Музейный комплекс старинных народных ремёсел и технологий. Можно увидеть работу гончара, кузнеца, пекаря.',
     address: 'д. Птичь, Пуховичский район',
     category: 'Культурный',
@@ -280,11 +280,11 @@ export const places = [
     id: 'minsk-region-9', 
     name: 'Усадьба Тышкевичей', 
     region: 'minsk-region',
-    image: 'https://avatars.mds.yandex.net/get-altay/1027639/2a00000188068f3a3cfa1b86c6141295b6ab/orig',
-    description: 'Родовое имение знатного литовско-белорусского рода Тышкевичей. Сохранились усадебный дом и парк.',
-    address: 'г. Логойск, Минская область',
+    image: 'https://hawat.by/sites/default/files/2021-04/20150913-DSC_4870.jpg',
+    description: 'Усадебный комплекс знатного литовско-белорусского рода Тышкевичей, расположенный в деревне Вялое. Построен в XIX веке в стиле классицизма. Сохранились усадебный дом, парк с системой прудов и хозяйственные постройки.',
+    address: 'д. Вялое, Логойский район, Минская область',
     category: 'Исторический',
-    rating: 4.4
+    rating: 4.5
   },
   { 
     id: 'minsk-region-10', 
@@ -463,10 +463,10 @@ export const places = [
     name: 'Часовня-усыпальница Ожешко', 
     region: 'brest',
     image: 'https://upload.wikimedia.org/wikipedia/commons/3/34/%D0%97%D0%B0%D0%BA%D0%BE%D0%B7%D0%B5%D0%BB%D1%8C._%D0%9A%D0%B0%D0%BF%D0%BB%D1%96%D1%86%D0%B0-%D0%BF%D0%B0%D1%85%D0%B0%D0%B2%D0%B0%D0%BB%D1%8C%D0%BD%D1%8F.jpg',
-    description: 'Неоготическая часовня-усыпальница семьи известной польской писательницы Элизы Ожешко.',
-    address: 'г. Гродно (ошибочно указан в Брестской области, но оставляю по вашему запросу)',
+    description: 'Неоготическая часовня-усыпальница семьи Ожешко, построенная в 1849 году. Находится в деревне Закозель. Часовня выполнена в стиле английской неоготики и является родовой усыпальницей. Памятник архитектуры XIX века.',
+    address: 'д. Закозель, Дрогичинский район, Брестская область',
     category: 'Культурный',
-    rating: 4.4
+    rating: 4.5
   },
   { 
     id: 'brest-10', 
@@ -544,7 +544,7 @@ export const places = [
     id: 'gomel-5', 
     name: 'Юровичский монастырь', 
     region: 'gomel',
-    image: 'https://ekskursii.by/images/obj1/396/c30he5_5_true.jpg',
+    image: 'https://avatars.mds.yandex.net/get-altay/12595784/2a0000018fabdd87b660254045ac09c7a4c3/orig',
     description: 'Единственный памятник архитектуры в стиле виленского барокко в Гомельской области.',
     address: 'д. Юровичи, ул. Горная, 9',
     category: 'Культурный',
@@ -579,6 +579,16 @@ export const places = [
     address: 'д. Демьянки, Гомельский район',
     category: 'Исторический',
     rating: 4.3
+  },
+  { 
+    id: 'gomel-9', 
+    name: 'Костёл Святого Антония Падуанского', 
+    region: 'gomel',
+    image: 'https://belarus24.by/upload/medialibrary/ec8/ec8eff7aaebbe7f3842455088c19d736.jpg',
+    description: 'Католический храм в неоготическом стиле, построенный в 1912 году. Находится в городе Рогачёв. Костел был возведён на средства прихожан и местной католической общины. Архитектурная доминанта исторической части города.',
+    address: 'г. Рогачёв, Гомельская область',
+    category: 'Культурный',
+    rating: 4.6
   },
 
   // ГРОДНЕНСКАЯ ОБЛАСТЬ - 15 мест
@@ -732,7 +742,46 @@ export const places = [
     category: 'Исторический',
     rating: 4.4
   },
-
+  { 
+    id: 'grodno-16', 
+    name: 'Усадьба Умястовских', 
+    region: 'grodno',
+    image: 'https://34travel.me/media/upload/images/2020/MAY/zhamyslaul/296A8544.jpg',
+    description: 'Усадебный комплекс рода Умястовских, построенный в XIX веке в стиле классицизма. Находится в деревне Жамыславль. Сохранились усадебный дом, парк и хозяйственные постройки. Памятник усадебно-парковой архитектуры.',
+    address: 'д. Жамыславль, Ивьевский район, Гродненская область',
+    category: 'Исторический',
+    rating: 4.4
+  },
+  { 
+    id: 'grodno-17', 
+    name: 'Костёл Святого Михаила Архангела', 
+    region: 'grodno',
+    image: 'https://upload.wikimedia.org/wikipedia/commons/e/e6/%D0%93%D0%BD%D0%B5%D0%B7%D0%BD%D0%B0._%D0%9A%D0%B0%D1%81%D1%86%D1%91%D0%BB.jpg',
+    description: 'Католический храм в неоготическом стиле, построенный в начале XX века. Находится в деревне Гнезно. Костел отличается строгими готическими формами и высокой башней. Действующий храм.',
+    address: 'д. Гнезно, Вороновский район, Гродненская область',
+    category: 'Культурный',
+    rating: 4.5
+  },
+  { 
+    id: 'grodno-18', 
+    name: 'Усадьба Огинского', 
+    region: 'grodno',
+    image: 'https://bestbelarus.by/upload/dev2fun.imagecompress/webp/sprint.editor/0e5/8mcqokbvsqc56ltela4yl4a22t5zu7ug.webp',
+    description: 'Усадебный комплекс, принадлежавший знаменитому композитору и политическому деятелю Михаилу Клеофасу Огинскому. Построен в конце XVIII - начале XIX века. Находится в деревне Залесье. Здесь Огинский написал знаменитый полонез "Прощание с Родиной". В усадьбе создан музей-усадьба композитора.',
+    address: 'аг. Залесье, Сморгонский район, Гродненская область',
+    category: 'Исторический',
+    rating: 4.7
+  },
+  { 
+    id: 'grodno-19', 
+    name: 'Меловые карьеры', 
+    region: 'grodno',
+    image: 'https://avatars.mds.yandex.net/get-altay/10648814/2a0000018aa1efb4fac2843168caf78e6c64/L_height',
+    description: 'Затопленные меловые карьеры с бирюзовой водой, образовавшиеся после добычи мела. Находятся в Волковысском районе. Популярное место для фотографий, прогулок и купания в летнее время. Вода имеет необычный бирюзовый цвет из-за высокого содержания мела.',
+    address: 'Волковысский район, Гродненская область',
+    category: 'Природный',
+    rating: 4.6
+  },
   // ВИТЕБСКАЯ ОБЛАСТЬ - 16 мест
   { 
     id: 'vitebsk-1', 
@@ -768,7 +817,7 @@ export const places = [
     id: 'vitebsk-4', 
     name: 'Софийский собор', 
     region: 'vitebsk',
-    image: 'https://planetabelarus.by/upload/medialibrary/f1c/f1c7c6157776296c9dbac6d992d37d56.jpg',
+    image: 'https://bestbelarus.by/upload/dev2fun.imagecompress/webp/iblock/aa8/cbtgght6ybokaxy4yhh9lziz14hfnmih.webp',
     description: 'Один из самых древних храмов Беларуси, построенный в XI веке. Памятник архитектуры в стиле барокко.',
     address: 'г. Полоцк, ул. Замковая, 1',
     category: 'Культурный',
@@ -816,9 +865,9 @@ export const places = [
   },
   { 
     id: 'vitebsk-9', 
-    name: 'Костёл Святой Анны (Мосар)', 
+    name: 'Костёл Святой Анны', 
     region: 'vitebsk',
-    image: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS_1MKeWWHYaQmJAHkxAhO4xDtRzobxMfDQDQ&s',
+    image: 'https://i.ytimg.com/vi/XXzjvaTcRZw/maxresdefault.jpg',
     description: 'Католический храм в неоготическом стиле, построенный в 1792 году. Находится в деревне Мосар, известной своим уникальным парковым комплексом "Мосарские Версали". Храм отреставрирован и окружен красивым ландшафтным парком.',
     address: 'аг. Мосар, Глубокский район, Витебская область',
     category: 'Культурный',
@@ -838,7 +887,7 @@ export const places = [
     id: 'vitebsk-11', 
     name: 'Костёл Святой Троицы', 
     region: 'vitebsk',
-    image: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTrzpeCxB-8J4tvWlBxELNuPz4R-fT_9N5d0g&s',
+    image: 'https://ekskursii.by/images/obj2/17336/1_clear_resize1.jpg',
     description: 'Католический храм в стиле неоготики, построенный в 1904-1914 годах. Один из самых высоких костёлов Беларуси (высота башни около 70 метров). Находится в городском посёлке Видзы на берегу озера. Часто называется "Видзовской неоготикой".',
     address: 'г. п. Видзы, Браславский район, Витебская область',
     category: 'Культурный',
@@ -846,11 +895,11 @@ export const places = [
   },
   { 
     id: 'vitebsk-12', 
-    name: 'Костёл Святого Тадеуша (Лучай)', 
+    name: 'Костёл Святого Тадеуша', 
     region: 'vitebsk',
-    image: 'https://poshyk.info/wp-content/uploads/2020/11/dji-belarus-kostel-luchai.jpg.webp',
+    image: 'https://avatars.mds.yandex.net/get-altay/1359533/2a000001642aa99cae6bef57f21242c27200/orig',
     description: 'Католический храм в стиле виленского барокко, построенный в 1766-1776 годах на средства канцлера Великого княжества Литовского Иоахима Хрептовича. Находится в деревне Лучай. Известен своими уникальными фресками и деревянными скульптурами.',
-    address: 'аг. Лучай, Поставский район, Витебская область',
+    address: 'аг. Лучай, ул. Садовая, 10А, Поставский район, Витебская область',
     category: 'Культурный',
     rating: 4.8
   },
@@ -866,7 +915,7 @@ export const places = [
   },
   { 
     id: 'vitebsk-14', 
-    name: 'Собор Рождества Пресвятой Богородицы (Глубокое)', 
+    name: 'Собор Рождества Пресвятой Богородицы', 
     region: 'vitebsk',
     image: 'https://vetliva.ru/upload/resize_cache/iblock/543/630_350_2/54327b2f2ea732658bb2c2a107c5a497.jpg',
     description: 'Православный собор в неовизантийском стиле, построенный в 1639-1654 годах как костёл кармелитов, позже перестроен в православный храм. Один из старейших храмов Витебской области. Находится в городе Глубокое, известном как "столица белорусского Виленского края".',
@@ -898,7 +947,7 @@ export const places = [
     id: 'vitebsk-17', 
     name: 'Церковь Успения Пресвятой Богородицы', 
     region: 'vitebsk',
-    image: 'https://my-places.by/_next/image?url=https%3A%2F%2Fstorage.googleapis.com%2Fmy-places-bucket-1%2Fimages%2F%C3%90%C2%A6%C3%90%C2%B5%C3%91%C2%80%C3%90%C2%BA%C3%90%C2%BE%C3%90%C2%B2%C3%91%C2%8C%206-1719656857335.jpg&w=3840&q=75',
+    image: 'https://marshryt.by/wp-content/uploads/Sarya-2-1.jpg',
     description: 'Уникальный православный храм-крепость в неоготическом стиле, построенный в 1857 году на средства помещика Игнатия Лопатинского. Расположен в деревне Сарья на берегу реки Сарьянки. Храм сочетает функции церкви и оборонительного сооружения.',
     address: 'аг. Сарья, Верхнедвинский район, Витебская область',
     category: 'Культурный',
@@ -978,11 +1027,11 @@ export const places = [
   },
   { 
     id: 'mogilev-8', 
-    name: 'Красный костёл (Костёл Святых Симеона и Елены)', 
+    name: 'Кафедральный собор Успения Пресвятой Девы Марии', 
     region: 'mogilev',
-    image: 'https://welcometobelarus.ru/images/thumbs/8935/1.jpg',
+    image: 'https://upload.wikimedia.org/wikipedia/commons/6/67/%D0%9A%D0%B0%D1%81%D1%86%D1%91%D0%BB_%D0%A1%D0%B2%D1%8F%D1%82%D0%BE%D0%B3%D0%B0_%D0%A1%D1%82%D0%B0%D0%BD%D1%96%D1%81%D0%BB%D0%B0%D0%B2%D0%B0.JPG',
     description: 'Один из самых известных католических храмов Могилёва, построенный в неоготическом стиле в начале XX века.',
-    address: 'г. Могилёв, ул. Первомайская, 75',
+    address: 'г. Могилёв, Лепешинского, 13',
     category: 'Культурный',
     rating: 4.6
   },
