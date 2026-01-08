@@ -14,9 +14,12 @@ const PlaceCard = ({ place }) => {
 
   return (
     <Link to={`/place/${place.id}`} className="place-card">
-      <img src={place.image} alt={place.name} />
+      <div className="place-image-container">
+        <img src={place.image} alt={place.name} />
+      </div>
       <div className="place-info">
         <h4>{place.name}</h4>
+        <p className="place-address">{place.address}</p>
         <p className="place-category">{place.category}</p>
         <div className="place-status">
           {visited ? (
