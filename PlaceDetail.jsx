@@ -117,18 +117,18 @@ const PlaceDetail = () => {
 
       <div className="place-header">
         <div className="place-image-container">
-          <img src={place.image} alt={place.name} className="place-image" />
-          <div className="place-rating-header">
-            <span className="rating-value">{place.rating}</span>
-            <span className="rating-max">/5</span>
-          </div>
+          <img 
+            src={place.image} 
+            alt={place.name} 
+            className="place-image"
+            onClick={() => window.open(place.image, '_blank')}
+          />
         </div>
         <div className="place-info">
           <h2>{place.name}</h2>
           <p className="place-category">{place.category}</p>
-          <div className="place-description-container">
-            <p className="place-description">{place.description}</p>
-          </div>
+          <p className="place-address">{place.address}</p>
+          <p className="place-description">{place.description}</p>
           <div className="place-meta">
             <div className="meta-item">
               <span className="meta-label">Рейтинг:</span>
